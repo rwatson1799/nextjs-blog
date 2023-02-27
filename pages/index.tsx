@@ -9,8 +9,10 @@ import styles from '../styles/Home.module.css';
 
 import { getSortedPostsData } from '../lib/posts';
 
+import { GetStaticProps } from 'next'
 
-export async function getStaticProps() {
+
+export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData();
   return {
     props: {
@@ -20,7 +22,15 @@ export async function getStaticProps() {
 }
 
 
-export default function Home({ allPostsData }) {
+type HomeProps = {
+  allPostsData: {
+    date: string
+    title: string
+    id: string
+  }[]
+}
+
+export default function Home({ allPostsData }: HomeProps) {
   return (
     <Layout home>
       <Head>
